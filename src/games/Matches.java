@@ -1,10 +1,18 @@
 package games;
 
-public class Matches {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class Matches extends UnicastRemoteObject implements GameInterface{
 
+	public Matches() throws RemoteException {
+		super();
+	}
+
+	@Override
+	public void play() throws RemoteException {
+		System.out.println("Lancement de la partie");
+		
 	}
 
 }
