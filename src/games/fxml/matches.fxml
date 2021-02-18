@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="282.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Jeu">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="243.0" prefWidth="673.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane fx:id="pane_player" prefHeight="371.0" prefWidth="207.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="25.0" text="A vous de jouer ! ">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="16.0" layoutY="71.0" prefHeight="61.0" prefWidth="196.0" text="Sélectionnez combien d'allumettes retirer" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="btn_one" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="1">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btn_two" layoutX="125.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="383.0" prefWidth="224.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label layoutX="27.0" layoutY="25.0" text="Allumettes restantes :">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_nb" layoutX="99.0" layoutY="62.0" text="0" textFill="RED">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_recap" layoutX="18.0" layoutY="122.0" prefHeight="94.0" prefWidth="188.0" text="Joueur n a retiré i allumettes" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="pane_cpu" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <Label layoutX="25.0" layoutY="14.0" prefHeight="79.0" prefWidth="175.0" text="A l'ordinateur de jouer !" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_cpu" layoutX="24.0" layoutY="107.0" prefHeight="55.0" prefWidth="178.0" text="L'ordinateur choisit combien d'allumettes retirer" textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Règles">
+               <content>
+                  <AnchorPane prefHeight="250.0" prefWidth="673.0">
+                     <children>
+                        <Label layoutX="33.0" layoutY="14.0" text="La partie commence en créant un tas contenant un nombre impair d'allumettes.">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="33.0" layoutY="48.0" prefHeight="52.0" prefWidth="613.0" text="Chaque tour les joueurs doivent retirer UNE ou DEUX allumettes du tas, celui retirant la dernière allumette a perdu." wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="33.0" layoutY="123.0" prefHeight="52.0" prefWidth="613.0" text="(S'il reste UNE allumettes c'est le joueur dont c'est le tour qui a perdu, si il ne reste AUCUNE alumette, alors c'est le joueur venant de jouer qui a perdu.)" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
