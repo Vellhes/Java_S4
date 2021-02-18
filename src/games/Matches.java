@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Matches extends UnicastRemoteObject implements GameInterface{
+public class Matches extends UnicastRemoteObject implements MatchesInterface{
 
 	Scanner sc = new Scanner(System.in);
 	
