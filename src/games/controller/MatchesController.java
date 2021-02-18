@@ -22,6 +22,8 @@ import javafx.util.Duration;
 
 public class MatchesController implements Initializable {
 	
+	int nbMatchesPlayer = 0;
+	
 	 @FXML
 	 private AnchorPane pane_player;
 
@@ -72,7 +74,6 @@ public class MatchesController implements Initializable {
 		 int order;
 		 if (result.get().getText() == "1") order = 1;
 		 else order = 2;
-		 
 		 if(order == 2)
 			cpuTurn();
 	 }
@@ -83,6 +84,7 @@ public class MatchesController implements Initializable {
 		 Matches m = new Matches();
 		 int sub = Integer.parseInt(but.getText());
 		 lbl_recap.setText("Vous avez retiré "+sub+" allumettes");
+		 nbMatchesPlayer += sub;
 		 lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
 		 lbl_cpu.setText("L'ordinateur choisit combien d'allumettes retirer ...");
 		 pane_cpu.setVisible(true);

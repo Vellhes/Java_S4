@@ -58,13 +58,19 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 		return matches-sub;
 	}
 	
-	public String endGame(int nbMatches, int order) throws RemoteException {
-		if(nbMatches==1 && order==1 || nbMatches==0 && order==2){
+	public String endGame(int nbMatches) throws RemoteException {
+		if(nbMatches%2==0){
 			return "Vous avez perdu... :( Vous ferez mieux la prochaine fois";
 		}
 		else {
 			return "Vous avez gagné ! :D GG ";
 		}
+	}
+
+	@Override
+	public String endGame(int nbMatches, int order) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
