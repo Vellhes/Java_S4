@@ -42,12 +42,12 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="btn_one" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="1">
+                                    <Button fx:id="btn_one" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="1" onAction="#playerTurn">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="btn_two" layoutX="125.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2">
+                                    <Button fx:id="btn_two" layoutX="125.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2" onAction="#playerTurn">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
@@ -80,7 +80,7 @@
                                           <Font size="21.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbl_cpu" layoutX="24.0" layoutY="107.0" prefHeight="55.0" prefWidth="178.0" text="L'ordinateur choisit combien d'allumettes retirer" textAlignment="CENTER" wrapText="true" />
+                                    <Label fx:id="lbl_cpu" layoutX="24.0" layoutY="107.0" prefHeight="55.0" prefWidth="178.0" text="L'ordinateur choisit combien d'allumettes retirer ..." textAlignment="CENTER" wrapText="true" />
                                  </children>
                               </AnchorPane>
                            </children>

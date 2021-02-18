@@ -16,7 +16,7 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 	@Override
 	public void play() throws RemoteException {
 		System.out.println("Lancement de la partie");
-		int nbMatches = generateMatches();
+		int nbMatches = 2;
 		System.out.println("La partie se joue avec "+nbMatches+" allumettes.");
 		System.out.println("Voulez vous jouer en premier ou en deuxième ?");
 		int order = sc.nextInt();
@@ -43,11 +43,19 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 		}
 	}
 	
-	public int generateMatches() {
+	public int generateMatches() throws RemoteException {
 		int n = new Random().nextInt(12)+11;
 		if(n%2==0)
 			n+=1;
 		return n;
+	}
+
+	public int rand() throws RemoteException {
+		return new Random().nextInt(1)+1;
+	}
+
+	public int subMatches(int matches, int sub) throws RemoteException {
+		return matches-sub;
 	}
 
 }
