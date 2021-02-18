@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import games.Matches;
 import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,36 +74,49 @@ public class MatchesController implements Initializable {
 		 else order = 2;
 		 
 		 if(order == 2)
-			try {
-				cpuTurn();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		else pane_cpu.setVisible(false);
+			cpuTurn();
 	 }
 	 
 	 @FXML
-	 public void playerTurn(ActionEvent event) throws NumberFormatException, RemoteException {
-		 
+	 public void playerTurn(ActionEvent event) throws NumberFormatException, RemoteException, InterruptedException {
 		 Button but = (Button)event.getSource();
 		 Matches m = new Matches();
-		 lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), Integer.parseInt(but.getText())));
+		 int sub = Integer.parseInt(but.getText());
+		 lbl_recap.setText("Vous avez retiré "+sub+" allumettes");
+		 lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
+		 lbl_cpu.setText("L'ordinateur choisit combien d'allumettes retirer ...");
+		 pane_cpu.setVisible(true);
+		 pane_player.setVisible(false);
 		 cpuTurn();
 	 }
 	 
-	 public void cpuTurn() throws RemoteException {
-		 Matches m = new Matches();
-		 PauseTransition pause = new PauseTransition(Duration.seconds(1));
-		 pane_cpu.setVisible(true);
-		 pane_player.setVisible(false);
-		 
-		 //pause à mettre en place
-		 
-		 int sub = m.rand();
-		 lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
-		 pane_cpu.setVisible(false);
-		 pane_player.setVisible(true);
+	 public void cpuTurn() {
+		 PauseTransition pause = new PauseTransition(Duration.seconds(3));
+		 pause.setOnFinished(event ->
+		 	{
+				 int sub = 0;
+				 Matches m = null;
+				try {
+					m = new Matches();
+					sub = m.rand();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				lbl_cpu.setText("");
+				lbl_recap.setText("L'ordinateur à retiré "+sub+" allumettes");
+				try {
+					lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				pane_cpu.setVisible(false);
+				pane_player.setVisible(true);
+			 }
+		 );
 		 pause.play();
+		 
 	}	 
 }
 	

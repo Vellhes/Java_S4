@@ -57,5 +57,14 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 	public int subMatches(int matches, int sub) throws RemoteException {
 		return matches-sub;
 	}
+	
+	public String endGame(int nbMatches, int order) throws RemoteException {
+		if(nbMatches==1 && order==1 || nbMatches==0 && order==2){
+			return "Vous avez perdu... :( Vous ferez mieux la prochaine fois";
+		}
+		else {
+			return "Vous avez gagné ! :D GG ";
+		}
+	}
 
 }
