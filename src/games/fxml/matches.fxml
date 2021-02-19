@@ -37,7 +37,7 @@
                                           <Font size="21.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="16.0" layoutY="71.0" prefHeight="61.0" prefWidth="196.0" text="Sélectionnez combien d'allumettes retirer" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="lbl_player" layoutX="16.0" layoutY="71.0" prefHeight="61.0" prefWidth="196.0" text="Total Alumettes retirées : 0 " textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -66,7 +66,7 @@
                                           <Font size="50.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbl_recap" layoutX="18.0" layoutY="122.0" prefHeight="94.0" prefWidth="188.0" text="Joueur n a retiré i allumettes" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="lbl_recap" layoutX="18.0" layoutY="122.0" prefHeight="94.0" prefWidth="188.0" text="" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="19.0" />
                                        </font>

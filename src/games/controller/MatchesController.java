@@ -23,6 +23,7 @@ import javafx.util.Duration;
 public class MatchesController implements Initializable {
 	
 	int nbMatchesPlayer = 0;
+	String result;
 	
 	 @FXML
 	 private AnchorPane pane_player;
@@ -35,6 +36,9 @@ public class MatchesController implements Initializable {
 
 	 @FXML
 	 private Label lbl_nb;
+	 
+	 @FXML
+	 private Label lbl_player;
 
 	 @FXML
 	 private Label lbl_recap;
@@ -82,22 +86,32 @@ public class MatchesController implements Initializable {
 	 public void playerTurn(ActionEvent event) throws NumberFormatException, RemoteException, InterruptedException {
 		 Button but = (Button)event.getSource();
 		 Matches m = new Matches();
+		 
 		 int sub = Integer.parseInt(but.getText());
-		 lbl_recap.setText("Vous avez retiré "+sub+" allumettes");
+		 int nbMatches = Integer.parseInt(lbl_nb.getText());
+		 
 		 nbMatchesPlayer += sub;
-		 lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
+		 lbl_player.setText(" Total Allumettes retirées : "+nbMatchesPlayer);
+		 lbl_recap.setText("Vous avez retiré "+sub+" allumettes");
+		 nbMatches = m.subMatches(nbMatches, sub);
+		 lbl_nb.setText(""+nbMatches);
 		 lbl_cpu.setText("L'ordinateur choisit combien d'allumettes retirer ...");
 		 pane_cpu.setVisible(true);
 		 pane_player.setVisible(false);
-		 cpuTurn();
+		 if(nbMatches==0) {
+			 result = m.endGame(nbMatchesPlayer);
+			 System.out.println(result);
+		 }
+		 else cpuTurn();
 	 }
 	 
 	 public void cpuTurn() {
 		 PauseTransition pause = new PauseTransition(Duration.seconds(3));
 		 pause.setOnFinished(event ->
 		 	{
-				 int sub = 0;
-				 Matches m = null;
+		 		int nbMatches = Integer.parseInt(lbl_nb.getText());
+		 		int sub = 0;
+		 		Matches m = null;
 				try {
 					m = new Matches();
 					sub = m.rand();
@@ -105,16 +119,24 @@ public class MatchesController implements Initializable {
 					e.printStackTrace();
 				}
 				lbl_cpu.setText("");
-				lbl_recap.setText("L'ordinateur à retiré "+sub+" allumettes");
 				try {
-					lbl_nb.setText(""+m.subMatches(Integer.parseInt(lbl_nb.getText()), sub));
+					nbMatches = m.subMatches(Integer.parseInt(lbl_nb.getText()), sub);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
+				lbl_recap.setText("L'ordinateur à retiré "+sub+" allumettes");
+				lbl_nb.setText(""+nbMatches);
 				pane_cpu.setVisible(false);
 				pane_player.setVisible(true);
+				/*if(nbMatches==0) {
+					try {
+						result = m.endGame(nbMatchesPlayer);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+				 }*/
 			 }
 		 );
 		 pause.play();

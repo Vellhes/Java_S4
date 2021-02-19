@@ -67,10 +67,4 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 		}
 	}
 
-	@Override
-	public String endGame(int nbMatches, int order) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
