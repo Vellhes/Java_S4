@@ -1,8 +1,6 @@
 package rmi;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.server.*;
-
 import games.Matches;
 
 public class Serveur{

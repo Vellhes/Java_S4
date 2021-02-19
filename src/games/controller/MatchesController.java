@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import games.Matches;
 import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

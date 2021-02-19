@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 import java.util.Scanner;
 
+@SuppressWarnings("serial")
 public class Matches extends UnicastRemoteObject implements MatchesInterface{
 
 	Scanner sc = new Scanner(System.in);
