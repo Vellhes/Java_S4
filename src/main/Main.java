@@ -1,10 +1,23 @@
 package main;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+public class Main extends Application {
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/matches.fxml"));
+		primaryStage.setTitle("Pulls moches");
+		primaryStage.setScene(new Scene(root,673,282));
+		primaryStage.show();
 	}
-
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

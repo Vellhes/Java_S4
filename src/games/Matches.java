@@ -10,39 +10,13 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 
 	Scanner sc = new Scanner(System.in);
 	
+	//Constructeur
+	
 	public Matches() throws RemoteException {
 		super();
 	}
 
-	@Override
-	public void play() throws RemoteException {
-		System.out.println("Lancement de la partie");
-		int nbMatches = 2;
-		System.out.println("La partie se joue avec "+nbMatches+" allumettes.");
-		System.out.println("Voulez vous jouer en premier ou en deuxième ?");
-		int order = sc.nextInt();
-		int subMatches = 0;
-		while(nbMatches>=2) {
-			if(order == 1) {
-				System.out.println("Combien d'allumettes voulez vous retirer ?");
-				subMatches = sc.nextInt();
-				order = 2;
-			}
-			else {
-				subMatches = new Random().nextInt(2)+1;
-				System.out.println("L'adversaire retire "+subMatches+" allumette(s)");
-				order = 1;
-			}
-			nbMatches = nbMatches - subMatches;
-			System.out.println("Il reste "+nbMatches+" allumettes");
-		}
-		if(nbMatches==1 && order==1 || nbMatches==0 && order==2){
-			System.out.println("Vous avez perdu... :(");
-		}
-		else {
-			System.out.println("Vous avez gagné ! :D");
-		}
-	}
+	//Méthode permettant la génération d'un nombre impair aléatoire [11;21] d'allumettes pour la partie
 	
 	public int generateMatches() throws RemoteException {
 		int n = new Random().nextInt(12)+11;
@@ -50,14 +24,20 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 			n+=1;
 		return n;
 	}
+	
+	//Méthode permettant la génération d'un entier entre 1 et 2 pour le tour de l'ordinateur
 
 	public int rand() throws RemoteException {
 		return new Random().nextInt(1)+1;
 	}
+	
+	//Méthode permettant de renvoyer le nombre d'allumettes après le tour d'un joueur
 
 	public int subMatches(int matches, int sub) throws RemoteException {
 		return matches-sub;
 	}
+	
+	//Méthode permettant de déterminer si le joueur à gagné ou perdu à la fin de la partie (nombre d'allumettes == 0)
 	
 	public String endGame(int nbMatches) throws RemoteException {
 		if(nbMatches%2==0){

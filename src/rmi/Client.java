@@ -10,7 +10,7 @@ public class Client {
 				int port = 1338;
 				MatchesInterface obj =
 						(MatchesInterface) Naming.lookup("rmi://"+host+":"+port+"/hello");
-				obj.play();
+
 			}
 			catch(Exception e){
 				System.out.println("Erreur : "+e);
