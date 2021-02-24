@@ -102,7 +102,11 @@ public class MatchesController implements Initializable {
 			pane_cpu.setVisible(true);
 			pane_player.setVisible(false);
 			cpuTurn();
-		}	
+		}
+		else {
+			pane_cpu.setVisible(false);
+			pane_player.setVisible(true);
+		}
 	}
 
 
@@ -151,60 +155,73 @@ public class MatchesController implements Initializable {
 	
 	public void cpuTurn() {
 		
+		int nbMatches = Integer.parseInt(lbl_nb.getText());
+		//Génération du nombre d'allumettes que l'ordinateur retire
+		int sub = 0;
+		Matches m = null;
+		try {
+			m = new Matches();
+			if(nbMatches == 1) {
+				sub = 1;
+			}
+			else {
+				sub = m.rand();
+			}
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		//Actualisation du nombre d'allumettes restantes dans le tas
+		try {
+			nbMatches = m.subMatches(Integer.parseInt(lbl_nb.getText()), sub);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		String nbMatchesText = ""+nbMatches;
+		String subText = "L'ordinateur à retiré "+sub+" allumettes";
+		
 		//Pause de deux secondes pendant que l'ordinateur joue
 		PauseTransition pause = new PauseTransition(Duration.seconds(2));
 		pause.setOnFinished(event ->
-		{
-			//Génération du nombre d'allumettes que l'ordinateur retire
-			int sub = 0;
-			Matches m = null;
-			try {
-				m = new Matches();
-				sub = m.rand();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-			
-			//Actualisation du nombre d'allumettes restantes dans le tas
-			int nbMatches = Integer.parseInt(lbl_nb.getText());
-			try {
-				nbMatches = m.subMatches(Integer.parseInt(lbl_nb.getText()), sub);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-			lbl_nb.setText(""+nbMatches);
+		{	
+			lbl_nb.setText(nbMatchesText);
 			
 			//Récapitulatif de ce qu'à fait l'ordinateur durant son tour
-			lbl_recap.setText("L'ordinateur à retiré "+sub+" allumettes");
-			
-			
+			lbl_recap.setText(subText);	
 			pane_cpu.setVisible(false);
 			pane_player.setVisible(true);
-			
-			//Condition d'arrêt de jeu
-			if(nbMatches==0) {
-				try {
-					//Alerte permettant au joueur de savoir si il a gagné ou perdu
-					result = m.endGame(nbMatchesPlayer);
-					Alert alertEnd = new Alert(AlertType.INFORMATION);
-					alertEnd.setContentText(result);
-					alertEnd.setHeaderText(null);
-					alertEnd.showAndWait();
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			//Si il ne reste qu'une allumette on autorise au joueur de ne cliquer que sur le bouton 1
-			else if(nbMatches==1) {
-				btn_two.setDisable(true);
-			}
 		});
+		//Condition d'arrêt de jeu
+		if(nbMatches==0) {
+			try {
+				lbl_nb.setText(nbMatchesText);
+				lbl_recap.setText(subText);	
+				//Alerte permettant au joueur de savoir si il a gagné ou perdu
+				result = m.endGame(nbMatchesPlayer);
+				Alert alertEnd = new Alert(AlertType.INFORMATION);
+				alertEnd.setContentText(result);
+				alertEnd.setHeaderText(null);
+				alertEnd.showAndWait();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		//Lancement de la pause
-		pause.play();	
+		//Si il ne reste qu'une allumette on autorise au joueur de ne cliquer que sur le bouton 1
+		else if(nbMatches==1) {
+			btn_two.setDisable(true);
+			//Lancement de la pause
+			pause.play();
+		}
+		else {
+			pause.play();
+		}
+		
+			
 	}	 
 }
 	
