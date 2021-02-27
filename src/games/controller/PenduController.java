@@ -1,12 +1,16 @@
 package games.controller;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
+import games.Pendu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class PenduController implements Initializable {
@@ -97,8 +101,31 @@ public class PenduController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
+		Pendu p = null;
+		try {
+			p = new Pendu();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		String word = null;
+		
+		try {
+			word = p.selectWord();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		lbl_pendu.setText(word);
+		Image img = new Image("games/ressources/img/pendu0.png");
+		img_pendu.setImage(img);
+		
+	}
+	
+	@FXML
+	public void letterChoice(ActionEvent event){
+		Button but = (Button)event.getSource();
 	}
 
 }

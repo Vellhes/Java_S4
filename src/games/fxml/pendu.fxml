@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="games.controller.PenduController">
    <children>
       <TabPane prefHeight="477.0" prefWidth="571.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -44,132 +44,132 @@
                         </GridPane>
                         <AnchorPane prefHeight="181.0" prefWidth="541.0">
                            <children>
-                              <Button fx:id="btn_a" layoutX="56.0" layoutY="48.0" mnemonicParsing="false" text="A">
+                              <Button fx:id="btn_a" layoutX="56.0" layoutY="48.0" mnemonicParsing="false" text="A" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_c" layoutX="132.0" layoutY="48.0" mnemonicParsing="false" text="C">
+                              <Button fx:id="btn_c" layoutX="132.0" layoutY="48.0" mnemonicParsing="false" text="C" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_b" layoutX="95.0" layoutY="48.0" mnemonicParsing="false" text="B">
+                              <Button fx:id="btn_b" layoutX="95.0" layoutY="48.0" mnemonicParsing="false" text="B" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_d" layoutX="170.0" layoutY="48.0" mnemonicParsing="false" text="D">
+                              <Button fx:id="btn_d" layoutX="170.0" layoutY="48.0" mnemonicParsing="false" text="D" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_e" layoutX="210.0" layoutY="48.0" mnemonicParsing="false" text="E">
+                              <Button fx:id="btn_e" layoutX="210.0" layoutY="48.0" mnemonicParsing="false" text="E" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_f" layoutX="246.0" layoutY="48.0" mnemonicParsing="false" text="F">
+                              <Button fx:id="btn_f" layoutX="246.0" layoutY="48.0" mnemonicParsing="false" text="F" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_g" layoutX="282.0" layoutY="48.0" mnemonicParsing="false" text="G">
+                              <Button fx:id="btn_g" layoutX="282.0" layoutY="48.0" mnemonicParsing="false" text="G" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_h" layoutX="322.0" layoutY="48.0" mnemonicParsing="false" text="H">
+                              <Button fx:id="btn_h" layoutX="322.0" layoutY="48.0" mnemonicParsing="false" text="H" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_j" layoutX="394.0" layoutY="48.0" mnemonicParsing="false" text="J">
+                              <Button fx:id="btn_j" layoutX="394.0" layoutY="48.0" mnemonicParsing="false" text="J" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_i" layoutX="362.0" layoutY="48.0" mnemonicParsing="false" text="I">
+                              <Button fx:id="btn_i" layoutX="362.0" layoutY="48.0" mnemonicParsing="false" text="I" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_k" layoutX="427.0" layoutY="48.0" mnemonicParsing="false" text="K">
+                              <Button fx:id="btn_k" layoutX="427.0" layoutY="48.0" mnemonicParsing="false" text="K" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_l" layoutX="465.0" layoutY="48.0" mnemonicParsing="false" text="L">
+                              <Button fx:id="btn_l" layoutX="465.0" layoutY="48.0" mnemonicParsing="false" text="L" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_m" layoutX="500.0" layoutY="48.0" mnemonicParsing="false" text="M">
+                              <Button fx:id="btn_m" layoutX="500.0" layoutY="48.0" mnemonicParsing="false" text="M" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_n" layoutX="49.0" layoutY="90.0" mnemonicParsing="false" text="N">
+                              <Button fx:id="btn_n" layoutX="49.0" layoutY="90.0" mnemonicParsing="false" text="N" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_o" layoutX="90.0" layoutY="90.0" mnemonicParsing="false" text="O">
+                              <Button fx:id="btn_o" layoutX="90.0" layoutY="90.0" mnemonicParsing="false" text="O" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_p" layoutX="131.0" layoutY="90.0" mnemonicParsing="false" text="P">
+                              <Button fx:id="btn_p" layoutX="131.0" layoutY="90.0" mnemonicParsing="false" text="P" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_q" layoutX="168.0" layoutY="90.0" mnemonicParsing="false" text="Q">
+                              <Button fx:id="btn_q" layoutX="168.0" layoutY="90.0" mnemonicParsing="false" text="Q" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_r" layoutX="209.0" layoutY="90.0" mnemonicParsing="false" text="R">
+                              <Button fx:id="btn_r" layoutX="209.0" layoutY="90.0" mnemonicParsing="false" text="R" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_s" layoutX="247.0" layoutY="90.0" mnemonicParsing="false" text="S">
+                              <Button fx:id="btn_s" layoutX="247.0" layoutY="90.0" mnemonicParsing="false" text="S" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_t" layoutX="284.0" layoutY="90.0" mnemonicParsing="false" text="T">
+                              <Button fx:id="btn_t" layoutX="284.0" layoutY="90.0" mnemonicParsing="false" text="T" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_u" layoutX="320.0" layoutY="90.0" mnemonicParsing="false" text="U">
+                              <Button fx:id="btn_u" layoutX="320.0" layoutY="90.0" mnemonicParsing="false" text="U" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_v" layoutX="360.0" layoutY="90.0" mnemonicParsing="false" text="V">
+                              <Button fx:id="btn_v" layoutX="360.0" layoutY="90.0" mnemonicParsing="false" text="V" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_w" layoutX="398.0" layoutY="90.0" mnemonicParsing="false" text="W">
+                              <Button fx:id="btn_w" layoutX="398.0" layoutY="90.0" mnemonicParsing="false" text="W" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_x" layoutX="440.0" layoutY="90.0" mnemonicParsing="false" text="X">
+                              <Button fx:id="btn_x" layoutX="440.0" layoutY="90.0" mnemonicParsing="false" text="X" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_y" layoutX="478.0" layoutY="90.0" mnemonicParsing="false" text="Y">
+                              <Button fx:id="btn_y" layoutX="478.0" layoutY="90.0" mnemonicParsing="false" text="Y" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btn_z" layoutX="515.0" layoutY="90.0" mnemonicParsing="false" text="Z">
+                              <Button fx:id="btn_z" layoutX="515.0" layoutY="90.0" mnemonicParsing="false" text="Z" onAction="#letterChoice">
                                  <font>
                                     <Font size="19.0" />
                                  </font>

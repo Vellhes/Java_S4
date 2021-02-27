@@ -1,5 +1,8 @@
 package main;
 
+import java.rmi.RemoteException;
+
+import games.Pendu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -11,13 +14,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/matches.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/pendu.fxml"));
 		primaryStage.setTitle("Pulls moches");
-		primaryStage.setScene(new Scene(root,673,282));
+		primaryStage.setScene(new Scene(root,573,448));
 		primaryStage.show();
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
 		launch(args);
 	}
 }
