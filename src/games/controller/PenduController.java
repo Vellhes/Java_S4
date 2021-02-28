@@ -15,6 +15,12 @@ import javafx.scene.image.ImageView;
 
 public class PenduController implements Initializable {
 
+	String word = null;
+	
+	String guessWord = "";
+	
+	int mistakes = 0;
+	
     @FXML
     private ImageView img_pendu;
 
@@ -108,24 +114,58 @@ public class PenduController implements Initializable {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
-		String word = null;
-		
+	
 		try {
 			word = p.selectWord();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		lbl_pendu.setText(word);
+		mistakes = 0;
+		
+		for(int i = 0; i<word.length();i++)
+			guessWord += "_ ";
+		lbl_pendu.setText(guessWord);
 		Image img = new Image("games/ressources/img/pendu0.png");
 		img_pendu.setImage(img);
-		
 	}
 	
 	@FXML
-	public void letterChoice(ActionEvent event){
+	public void letterChoice(ActionEvent event) throws RemoteException{
+		
+		Pendu p = new Pendu();
+		
 		Button but = (Button)event.getSource();
+		String letterString = but.getText();
+		letterString = letterString.toLowerCase();
+		char letter = letterString.charAt(0);
+		
+		boolean check = p.checkLetter(letter, word);
+		if(check==true) {
+			guessWord = p.avancement(letter, word, guessWord);
+			lbl_pendu.setText(guessWord);
+			for(int i = 0 ; i < guessWord.length() ; i+=2) {
+				if(guessWord.charAt(i)=='_') {
+					break;
+				}
+				else {
+					if(i==(guessWord.length()-2)) {
+						System.out.println("mot trouvé");
+					}
+				}
+			}
+		}
+		else {
+			mistakes += 1;
+			Image img = new Image("games/ressources/img/pendu"+mistakes+".png");
+			img_pendu.setImage(img);
+			if(mistakes == 9) {
+				System.out.println("Vous avez perdu");
+			}
+		}
+		
+		but.setVisible(false);
+	
 	}
 
 }

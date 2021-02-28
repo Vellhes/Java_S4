@@ -1,12 +1,10 @@
 bleu 
 autre 
 bizarre
-difficile
 drole
 etrange
 facile
 grave
-impossible
 jeune
 juste
 libre
@@ -17,7 +15,6 @@ propre
 rouge
 sale
 simple
-tranquille
 triste
 vide
 bonne
@@ -26,4 +23,3 @@ genoux
 yaourt
 clavier
 souris
-television

@@ -29,7 +29,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 
 	@Override
 	public boolean checkLetter(char letter, String word) throws RemoteException {
-		boolean check = word.indexOf(letter) > 0;
+		boolean check = word.indexOf(letter) >= 0;
 		return check;
 	}
 
