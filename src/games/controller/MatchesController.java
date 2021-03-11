@@ -92,7 +92,7 @@ public class MatchesController implements Initializable {
 			//Création de boutons personnalisés
 		ButtonType first = new ButtonType("1", ButtonData.OK_DONE);
 		ButtonType second = new ButtonType("2", ButtonData.CANCEL_CLOSE);
-		Alert alert2 = new Alert(AlertType.WARNING, "Voulez vous jouer en 1er ou en 2e ?",first, second);
+		Alert alert2 = new Alert(AlertType.NONE, "Voulez vous jouer en 1er ou en 2e ?",first, second);
 		
 			//Récupération du choix du joueur (si il ferme la fenêtre il joue en 2e)
 		Optional<ButtonType> result = alert2.showAndWait();
@@ -145,6 +145,7 @@ public class MatchesController implements Initializable {
 			alertEnd.setContentText(result);
 			alertEnd.setHeaderText(null);
 			alertEnd.showAndWait();
+			reload();
 		}
 		//Autrement, lancement du tour de l'ordinateur
 		else cpuTurn();
@@ -206,6 +207,7 @@ public class MatchesController implements Initializable {
 				alertEnd.setContentText(result);
 				alertEnd.setHeaderText(null);
 				alertEnd.showAndWait();
+				reload();
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -222,7 +224,18 @@ public class MatchesController implements Initializable {
 		}
 		
 			
-	}	 
+	}
+	
+	//Fonction permettant de relancer la partie ou de quitter le jeu
+	public void reload() {
+		ButtonType yes = new ButtonType("oui", ButtonData.OK_DONE);
+		ButtonType no = new ButtonType("non", ButtonData.CANCEL_CLOSE);
+		Alert alertRestart = new Alert(AlertType.CONFIRMATION, "Voulez vous faire une nouvelle partie ?",yes,no);
+		Optional<ButtonType> result = alertRestart.showAndWait();
+		if(result.get().getText()=="oui") {
+			initialize(null,null);
+		}
+	}
 }
 	
 	
