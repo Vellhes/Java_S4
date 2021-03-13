@@ -42,12 +42,12 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="btn_un" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="1" onAction="#playerTurn">
+                                    <Button fx:id="btn_un" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="1" onAction="#tourJoueur">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="btn_deux" layoutX="125.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2" onAction="#playerTurn">
+                                    <Button fx:id="btn_deux" layoutX="125.0" layoutY="155.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2" onAction="#tourOrdi">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
