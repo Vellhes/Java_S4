@@ -6,19 +6,19 @@ import java.util.Random;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-public class Matches extends UnicastRemoteObject implements MatchesInterface{
+public class Allumettes extends UnicastRemoteObject implements AllumettesInterface{
 
 	Scanner sc = new Scanner(System.in);
 	
 	//Constructeur
 	
-	public Matches() throws RemoteException {
+	public Allumettes() throws RemoteException {
 		super();
 	}
 
 	//Méthode permettant la génération d'un nombre impair aléatoire [11;21] d'allumettes pour la partie
 	
-	public int generateMatches() throws RemoteException {
+	public int generationAllumettes() throws RemoteException {
 		int n = new Random().nextInt(12)+11;
 		if(n%2==0)
 			n+=1;
@@ -27,20 +27,20 @@ public class Matches extends UnicastRemoteObject implements MatchesInterface{
 	
 	//Méthode permettant la génération d'un entier entre 1 et 2 pour le tour de l'ordinateur
 
-	public int rand() throws RemoteException {
+	public int aleatoire() throws RemoteException {
 		return new Random().nextInt(1)+1;
 	}
 	
 	//Méthode permettant de renvoyer le nombre d'allumettes après le tour d'un joueur
 
-	public int subMatches(int matches, int sub) throws RemoteException {
-		return matches-sub;
+	public int soustraireAllumettes(int allum, int moins) throws RemoteException {
+		return allum-moins;
 	}
 	
 	//Méthode permettant de déterminer si le joueur à gagné ou perdu à la fin de la partie (nombre d'allumettes == 0)
 	
-	public String endGame(int nbMatches) throws RemoteException {
-		if(nbMatches%2==0){
+	public String finDuJeu(int nbAllumettes) throws RemoteException {
+		if(nbAllumettes%2==0){
 			return "Vous avez perdu... :( Vous ferez mieux la prochaine fois";
 		}
 		else {

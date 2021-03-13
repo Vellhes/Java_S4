@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import games.Matches;
+import games.Allumettes;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,93 +19,93 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class MatchesController implements Initializable {
+public class AllumettesController implements Initializable {
 	
 	//Variable décrivant le nombre d'allumettes récupérée par le joueur
 	
-	int nbMatchesPlayer = 0;
+	int nbAllumettesJoueur = 0;
 	
 	//Chaine décrivant le résultat final de la partie
 	
-	String result;
+	String resultat;
 	
 	@FXML
-	private AnchorPane pane_player;
+	private AnchorPane pane_joueur;
 
 	@FXML
-	private Button btn_one;
+	private Button btn_un;
 
 	@FXML
-	private Button btn_two;
+	private Button btn_deux;
 
 	@FXML
 	private Label lbl_nb;
 	 
 	@FXML
-	private Label lbl_player;
+	private Label lbl_joueur;
 
 	@FXML
 	private Label lbl_recap;
 
 	@FXML
-	private AnchorPane pane_cpu;
+	private AnchorPane pane_ordi;
 
 	@FXML
-	private Label lbl_cpu;
+	private Label lbl_ordi;
 	
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		
-		/*Création d'une nouvelle variable Matches pour utiliser les méthodes du jeu d'allumettes
+		/*Création d'une nouvelle variable Allumettes pour utiliser les méthodes du jeu d'allumettes
 		 * Obligé de créer à l'intérieur de la méthode, car hors il y a des problèmes avec le constructeur 
 		 * Try catch obligatoire du au "RemoteException" */
-		Matches m = null;
+		Allumettes a = null;
 		try {
-			m = new Matches();
+			a = new Allumettes();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
 		//Nombre d'allumettes de la partie
-		int nbMatches = 0;
+		int nbAllumettes = 0;
 		
 		//Génération du nombre d'allumettes de la partie
 		try {
-			nbMatches = m.generateMatches();
+			nbAllumettes = a.generationAllumettes();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
 		//Clear des labels pour le début de la partie
-		lbl_nb.setText(nbMatches+"");
+		lbl_nb.setText(nbAllumettes+"");
 		lbl_recap.setText("");
 		
 		//Annonce du nombre d'allumettes de la partie
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setContentText("La partie commence avec "+nbMatches+" allumettes");
-		alert.setHeaderText(null);
-		alert.showAndWait();
+		Alert alerteNb = new Alert(AlertType.INFORMATION);
+		alerteNb.setContentText("La partie commence avec "+nbAllumettes+" allumettes");
+		alerteNb.setHeaderText(null);
+		alerteNb.showAndWait();
 		
 		//Proposition au joueur de choisir s'il commence en 1er ou en 2e
 			//Création de boutons personnalisés
-		ButtonType first = new ButtonType("1", ButtonData.OK_DONE);
+		ButtonType premier = new ButtonType("1", ButtonData.OK_DONE);
 		ButtonType second = new ButtonType("2", ButtonData.CANCEL_CLOSE);
-		Alert alert2 = new Alert(AlertType.NONE, "Voulez vous jouer en 1er ou en 2e ?",first, second);
+		Alert alerteMain = new Alert(AlertType.NONE, "Voulez vous jouer en 1er ou en 2e ?",premier, second);
 		
 			//Récupération du choix du joueur (si il ferme la fenêtre il joue en 2e)
-		Optional<ButtonType> result = alert2.showAndWait();
+		Optional<ButtonType> resultat = alerteMain.showAndWait();
 			
 			//Action si le joueur joue en 2e
-		if (result.get().getText() == "2") {
-			pane_cpu.setVisible(true);
-			pane_player.setVisible(false);
-			cpuTurn();
+		if (resultat.get().getText() == "2") {
+			pane_ordi.setVisible(true);
+			pane_joueur.setVisible(false);
+			tourOrdi();
 		}
 		else {
-			pane_cpu.setVisible(false);
-			pane_player.setVisible(true);
+			pane_ordi.setVisible(false);
+			pane_joueur.setVisible(true);
 		}
 	}
 
@@ -114,59 +114,59 @@ public class MatchesController implements Initializable {
 	//Méthode utilisé lorsque le joueur choisit d'enlever 1 ou 2 allumettes (actions sur les boutons)
 	
 	@FXML
-	public void playerTurn(ActionEvent event) throws NumberFormatException, RemoteException, InterruptedException {
+	public void tourJoueur(ActionEvent evenement) throws NumberFormatException, RemoteException, InterruptedException {
 		
 		//Récupération du nombre d'allumettes que le joueur choisit d'enlever (en cliquant sur un des deux boutons)
-		Button but = (Button)event.getSource();
-		int sub = Integer.parseInt(but.getText());
+		Button bouton = (Button)evenement.getSource();
+		int sub = Integer.parseInt(bouton.getText());
 		
 		//Changement du nombre d'allumettes que le joueur a retiré au total
-		nbMatchesPlayer += sub;
-		lbl_player.setText(" Total Allumettes retirées : "+nbMatchesPlayer);
+		nbAllumettesJoueur += sub;
+		lbl_joueur.setText(" Total Allumettes retirées : "+nbAllumettesJoueur);
 		
 		//Label permettant de rappeler ce qu'il s'est passé au tour précédent
 		lbl_recap.setText("Vous avez retiré "+sub+" allumettes");
 		
-		//Création d'un objet Matches pour utiliser les méthodes
-		Matches m = new Matches();
+		//Création d'un objet Allumettes pour utiliser les méthodes
+		Allumettes m = new Allumettes();
 		
 		//Actualisation du nombre d'allumettes restantes dans le tas
 		int nbMatches = Integer.parseInt(lbl_nb.getText());
-		nbMatches = m.subMatches(nbMatches, sub);
+		nbMatches = m.soustraireAllumettes(nbMatches, sub);
 		lbl_nb.setText(""+nbMatches);
-		pane_cpu.setVisible(true);
-		pane_player.setVisible(false);
+		pane_ordi.setVisible(true);
+		pane_joueur.setVisible(false);
 		
 		//Condition d'arrêt de jeu
 		if(nbMatches==0) {
 			//Alerte permettant au joueur de savoir si il a gagné ou perdu
-			result = m.endGame(nbMatchesPlayer);
+			resultat = m.finDuJeu(nbAllumettesJoueur);
 			Alert alertEnd = new Alert(AlertType.INFORMATION);
-			alertEnd.setContentText(result);
+			alertEnd.setContentText(resultat);
 			alertEnd.setHeaderText(null);
 			alertEnd.showAndWait();
-			reload();
+			rejouer();
 		}
 		//Autrement, lancement du tour de l'ordinateur
-		else cpuTurn();
+		else tourOrdi();
 	} 
 	
 	
 	//Méthode décrivant le tour de l'ordinateur
 	
-	public void cpuTurn() {
+	public void tourOrdi() {
 		
-		int nbMatches = Integer.parseInt(lbl_nb.getText());
+		int nbAllumettes = Integer.parseInt(lbl_nb.getText());
 		//Génération du nombre d'allumettes que l'ordinateur retire
-		int sub = 0;
-		Matches m = null;
+		int moins = 0;
+		Allumettes a = null;
 		try {
-			m = new Matches();
-			if(nbMatches == 1) {
-				sub = 1;
+			a = new Allumettes();
+			if(nbAllumettes == 1) {
+				moins = 1;
 			}
 			else {
-				sub = m.rand();
+				moins = a.aleatoire();
 			}
 			
 		} catch (RemoteException e) {
@@ -175,47 +175,47 @@ public class MatchesController implements Initializable {
 		
 		//Actualisation du nombre d'allumettes restantes dans le tas
 		try {
-			nbMatches = m.subMatches(Integer.parseInt(lbl_nb.getText()), sub);
+			nbAllumettes = a.soustraireAllumettes(Integer.parseInt(lbl_nb.getText()), moins);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		String nbMatchesText = ""+nbMatches;
-		String subText = "L'ordinateur à retiré "+sub+" allumettes";
+		String nbAllumettesTexte = ""+nbAllumettes;
+		String moinsText = "L'ordinateur à retiré "+moins+" allumettes";
 		
 		//Pause de deux secondes pendant que l'ordinateur joue
 		PauseTransition pause = new PauseTransition(Duration.seconds(2));
 		pause.setOnFinished(event ->
 		{	
-			lbl_nb.setText(nbMatchesText);
+			lbl_nb.setText(nbAllumettesTexte);
 			
 			//Récapitulatif de ce qu'à fait l'ordinateur durant son tour
-			lbl_recap.setText(subText);	
-			pane_cpu.setVisible(false);
-			pane_player.setVisible(true);
+			lbl_recap.setText(moinsText);	
+			pane_ordi.setVisible(false);
+			pane_joueur.setVisible(true);
 		});
 		//Condition d'arrêt de jeu
-		if(nbMatches==0) {
+		if(nbAllumettes==0) {
 			try {
-				lbl_nb.setText(nbMatchesText);
-				lbl_recap.setText(subText);	
+				lbl_nb.setText(nbAllumettesTexte);
+				lbl_recap.setText(moinsText);	
 				//Alerte permettant au joueur de savoir si il a gagné ou perdu
-				result = m.endGame(nbMatchesPlayer);
-				Alert alertEnd = new Alert(AlertType.INFORMATION);
-				alertEnd.setContentText(result);
-				alertEnd.setHeaderText(null);
-				alertEnd.showAndWait();
-				reload();
+				resultat = a.finDuJeu(nbAllumettesJoueur);
+				Alert alertFin = new Alert(AlertType.INFORMATION);
+				alertFin.setContentText(resultat);
+				alertFin.setHeaderText(null);
+				alertFin.showAndWait();
+				rejouer();
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
 		
 		//Si il ne reste qu'une allumette on autorise au joueur de ne cliquer que sur le bouton 1
-		else if(nbMatches==1) {
-			btn_two.setDisable(true);
+		else if(nbAllumettes==1) {
+			btn_deux.setDisable(true);
 			//Lancement de la pause
 			pause.play();
 		}
@@ -227,12 +227,12 @@ public class MatchesController implements Initializable {
 	}
 	
 	//Fonction permettant de relancer la partie ou de quitter le jeu
-	public void reload() {
-		ButtonType yes = new ButtonType("oui", ButtonData.OK_DONE);
-		ButtonType no = new ButtonType("non", ButtonData.CANCEL_CLOSE);
-		Alert alertRestart = new Alert(AlertType.CONFIRMATION, "Voulez vous faire une nouvelle partie ?",yes,no);
-		Optional<ButtonType> result = alertRestart.showAndWait();
-		if(result.get().getText()=="oui") {
+	public void rejouer() {
+		ButtonType oui = new ButtonType("oui", ButtonData.OK_DONE);
+		ButtonType non = new ButtonType("non", ButtonData.CANCEL_CLOSE);
+		Alert alertRecommencer = new Alert(AlertType.CONFIRMATION, "Voulez vous faire une nouvelle partie ?",oui,non);
+		Optional<ButtonType> resultat = alertRecommencer.showAndWait();
+		if(resultat.get().getText()=="oui") {
 			initialize(null,null);
 		}
 	}

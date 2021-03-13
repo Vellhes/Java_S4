@@ -14,9 +14,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/matches.fxml"));
-		primaryStage.setTitle("Pulls moches");
-		primaryStage.setScene(new Scene(root,673,282));
+		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/pendu.fxml"));
+		primaryStage.setTitle("JEUX");
+		primaryStage.setScene(new Scene(root,600,480));
 		primaryStage.show();
 	}
 	

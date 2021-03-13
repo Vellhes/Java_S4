@@ -1,6 +1,7 @@
 package rmi;
 import java.rmi.*;
-import games.MatchesInterface;
+
+import games.AllumettesInterface;
 
 
 public class Client {
@@ -8,8 +9,8 @@ public class Client {
 			try {
 				String host = "127.0.0.1";
 				int port = 1338;
-				MatchesInterface obj =
-						(MatchesInterface) Naming.lookup("rmi://"+host+":"+port+"/hello");
+				AllumettesInterface obj =
+						(AllumettesInterface) Naming.lookup("rmi://"+host+":"+port+"/hello");
 
 			}
 			catch(Exception e){

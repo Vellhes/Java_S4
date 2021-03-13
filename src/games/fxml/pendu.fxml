@@ -189,7 +189,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="96.0" prefHeight="82.0" prefWidth="580.0" text="Au début de la partie, un mot aléatoire est selecitonné dans un dictionnaire de mot. Sur la droite de l'écran se trouvera un suite de caractère &quot;_&quot; pour chaque lettre, par exemple pour chien (5 lettres), on verra &quot;_ _ _ _ _&quot; (5 tirets)" wrapText="true">
+                        <Label layoutX="14.0" layoutY="96.0" prefHeight="82.0" prefWidth="580.0" text="Au début de la partie, un mot aléatoire est selectionné dans un dictionnaire de mot. Sur la droite de l'écran se trouvera un suite de caractère &quot;_&quot; pour chaque lettre, par exemple pour chien (5 lettres), on verra &quot;_ _ _ _ _&quot; (5 tirets)" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font>
