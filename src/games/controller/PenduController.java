@@ -15,11 +15,11 @@ import javafx.scene.image.ImageView;
 
 public class PenduController implements Initializable {
 
-	String word = null;
+	String mot = null;
 	
-	String guessWord = "";
+	String motCache = "";
 	
-	int mistakes = 0;
+	int erreurs = 0;
 	
     @FXML
     private ImageView img_pendu;
@@ -116,55 +116,55 @@ public class PenduController implements Initializable {
 		}
 	
 		try {
-			word = p.selectWord();
+			mot = p.selectMot();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		mistakes = 0;
+		erreurs = 0;
 		
-		for(int i = 0; i<word.length();i++)
-			guessWord += "_ ";
-		lbl_pendu.setText(guessWord);
+		for(int i = 0; i<mot.length();i++)
+			motCache += "_ ";
+		lbl_pendu.setText(motCache);
 		Image img = new Image("games/ressources/img/pendu0.png");
 		img_pendu.setImage(img);
 	}
 	
 	@FXML
-	public void letterChoice(ActionEvent event) throws RemoteException{
+	public void choixLettre(ActionEvent evenement) throws RemoteException{
 		
 		Pendu p = new Pendu();
 		
-		Button but = (Button)event.getSource();
-		String letterString = but.getText();
-		letterString = letterString.toLowerCase();
-		char letter = letterString.charAt(0);
+		Button bouton = (Button)evenement.getSource();
+		String chaineLettre = bouton.getText();
+		chaineLettre = chaineLettre.toLowerCase();
+		char lettre = chaineLettre.charAt(0);
 		
-		boolean check = p.checkLetter(letter, word);
-		if(check==true) {
-			guessWord = p.avancement(letter, word, guessWord);
-			lbl_pendu.setText(guessWord);
-			for(int i = 0 ; i < guessWord.length() ; i+=2) {
-				if(guessWord.charAt(i)=='_') {
+		boolean verif = p.verifLettre(lettre, mot);
+		if(verif==true) {
+			motCache = p.avancement(lettre, mot, motCache);
+			lbl_pendu.setText(motCache);
+			for(int i = 0 ; i < motCache.length() ; i+=2) {
+				if(motCache.charAt(i)=='_') {
 					break;
 				}
 				else {
-					if(i==(guessWord.length()-2)) {
+					if(i==(motCache.length()-2)) {
 						System.out.println("mot trouvé");
 					}
 				}
 			}
 		}
 		else {
-			mistakes += 1;
-			Image img = new Image("games/ressources/img/pendu"+mistakes+".png");
+			erreurs += 1;
+			Image img = new Image("games/ressources/img/pendu"+erreurs+".png");
 			img_pendu.setImage(img);
-			if(mistakes == 9) {
+			if(erreurs == 9) {
 				System.out.println("Vous avez perdu");
 			}
 		}
 		
-		but.setVisible(false);
+		bouton.setVisible(false);
 	
 	}
 

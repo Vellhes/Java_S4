@@ -5,8 +5,8 @@ import java.rmi.RemoteException;
 
 public interface PenduInterface extends Remote {
 	
-	public String selectWord() throws RemoteException;
-	public boolean checkLetter(char letter, String word) throws RemoteException;
-	public String avancement(char letter, String word, String guessWord) throws RemoteException;
-	public String endGame(int mistakes) throws RemoteException;
+	public String selectMot() throws RemoteException;
+	public boolean verifLettre(char lettre, String mot) throws RemoteException;
+	public String avancement(char lettre, String mot, String motCache) throws RemoteException;
+	public String finDuJeu(int erreurs) throws RemoteException;
 }

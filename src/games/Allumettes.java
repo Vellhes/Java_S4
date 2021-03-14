@@ -27,7 +27,7 @@ public class Allumettes extends UnicastRemoteObject implements AllumettesInterfa
 	
 	//Méthode permettant la génération d'un entier entre 1 et 2 pour le tour de l'ordinateur
 
-	public int aleatoire() throws RemoteException {
+	public int coupOrdi() throws RemoteException {
 		return new Random().nextInt(1)+1;
 	}
 	

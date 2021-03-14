@@ -16,43 +16,43 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 	}
 
 	@Override
-	public String selectWord() throws RemoteException {
+	public String selectMot() throws RemoteException {
 		List<String> dico = null;
 		try {
 			dico = Files.readAllLines(new File("src/games/ressources/dictionnaire.txt").toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Random rand = new Random();
-		return dico.get(rand.nextInt(dico.size()));
+		Random aleatoire = new Random();
+		return dico.get(aleatoire.nextInt(dico.size()));
 	}
 
 	@Override
-	public boolean checkLetter(char letter, String word) throws RemoteException {
-		boolean check = word.indexOf(letter) >= 0;
-		return check;
+	public boolean verifLettre(char lettre, String mot) throws RemoteException {
+		boolean verif = mot.indexOf(lettre) >= 0;
+		return verif;
 	}
 
 	@Override
-	public String avancement(char letter, String word, String guessWord) throws RemoteException {
-		String newWord = "";
-		for(int i = 0;i<word.length();i++ ) {
-			int rank = i*2;
-			if(word.charAt(i)==letter) {
-				newWord = newWord+letter+" ";
+	public String avancement(char lettre, String mot, String motCache) throws RemoteException {
+		String nouveauMot = "";
+		for(int i = 0;i<mot.length();i++ ) {
+			int rang = i*2;
+			if(mot.charAt(i)==lettre) {
+				nouveauMot = nouveauMot+lettre+" ";
 			}
-			else if(guessWord.charAt(rank) != '_') {
-				newWord = newWord+guessWord.charAt(rank)+" ";
+			else if(motCache.charAt(rang) != '_') {
+				nouveauMot = nouveauMot+motCache.charAt(rang)+" ";
 			}
 			else {
-				newWord = newWord+"_ ";
+				nouveauMot = nouveauMot+"_ ";
 			}
 		}
-		return newWord;
+		return nouveauMot;
 	}
 
 	@Override
-	public String endGame(int mistakes) throws RemoteException {
+	public String finDuJeu(int erreurs) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -81,7 +81,7 @@ public class AllumettesController implements Initializable {
 		//Clear des labels pour le début de la partie
 		lbl_nb.setText(nbAllumettes+"");
 		lbl_recap.setText("");
-		
+		btn_deux.setDisable(false);
 		//Annonce du nombre d'allumettes de la partie
 		Alert alerteNb = new Alert(AlertType.INFORMATION);
 		alerteNb.setContentText("La partie commence avec "+nbAllumettes+" allumettes");
@@ -131,14 +131,14 @@ public class AllumettesController implements Initializable {
 		Allumettes m = new Allumettes();
 		
 		//Actualisation du nombre d'allumettes restantes dans le tas
-		int nbMatches = Integer.parseInt(lbl_nb.getText());
-		nbMatches = m.soustraireAllumettes(nbMatches, sub);
-		lbl_nb.setText(""+nbMatches);
+		int nbAllumettes = Integer.parseInt(lbl_nb.getText());
+		nbAllumettes = m.soustraireAllumettes(nbAllumettes, sub);
+		lbl_nb.setText(""+nbAllumettes);
 		pane_ordi.setVisible(true);
 		pane_joueur.setVisible(false);
 		
 		//Condition d'arrêt de jeu
-		if(nbMatches==0) {
+		if(nbAllumettes==0) {
 			//Alerte permettant au joueur de savoir si il a gagné ou perdu
 			resultat = m.finDuJeu(nbAllumettesJoueur);
 			Alert alertEnd = new Alert(AlertType.INFORMATION);
@@ -166,7 +166,7 @@ public class AllumettesController implements Initializable {
 				moins = 1;
 			}
 			else {
-				moins = a.aleatoire();
+				moins = a.coupOrdi();
 			}
 			
 		} catch (RemoteException e) {
