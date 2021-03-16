@@ -19,7 +19,7 @@
         <tabs>
           <Tab text="Jeu">
                <content>
-                  <VBox prefHeight="448.0" prefWidth="573.0">
+                  <VBox prefHeight="448.0" prefWidth="573.0" fx:id="boxJeu">
                      <children>
                         <GridPane prefHeight="272.0" prefWidth="600.0">
                           <columnConstraints>

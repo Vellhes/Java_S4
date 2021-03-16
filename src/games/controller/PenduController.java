@@ -2,6 +2,7 @@ package games.controller;
 
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import games.Pendu;
@@ -9,9 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class PenduController implements Initializable {
 
@@ -20,6 +26,9 @@ public class PenduController implements Initializable {
 	String motCache = "";
 	
 	int erreurs = 0;
+	
+	@FXML
+	private VBox boxJeu;
 	
     @FXML
     private ImageView img_pendu;
@@ -107,7 +116,36 @@ public class PenduController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		boxJeu.setDisable(false);
+		motCache = "";
+		erreurs = 0;
+		btn_a.setVisible(true);
+		btn_b.setVisible(true);
+		btn_c.setVisible(true);
+		btn_d.setVisible(true);
+		btn_e.setVisible(true);
+		btn_f.setVisible(true);
+		btn_g.setVisible(true);
+		btn_h.setVisible(true);
+		btn_i.setVisible(true);
+		btn_j.setVisible(true);
+		btn_k.setVisible(true);
+		btn_l.setVisible(true);
+		btn_m.setVisible(true);
+		btn_n.setVisible(true);
+		btn_o.setVisible(true);
+		btn_p.setVisible(true);
+		btn_q.setVisible(true);
+		btn_r.setVisible(true);
+		btn_s.setVisible(true);
+		btn_t.setVisible(true);
+		btn_u.setVisible(true);
+		btn_v.setVisible(true);
+		btn_w.setVisible(true);
+		btn_x.setVisible(true);
+		btn_y.setVisible(true);
+		btn_z.setVisible(true);
+
 		Pendu p = null;
 		try {
 			p = new Pendu();
@@ -150,7 +188,7 @@ public class PenduController implements Initializable {
 				}
 				else {
 					if(i==(motCache.length()-2)) {
-						System.out.println("mot trouvé");
+						alerteDeFin(erreurs);
 					}
 				}
 			}
@@ -160,12 +198,28 @@ public class PenduController implements Initializable {
 			Image img = new Image("games/ressources/img/pendu"+erreurs+".png");
 			img_pendu.setImage(img);
 			if(erreurs == 9) {
-				System.out.println("Vous avez perdu");
+				alerteDeFin(erreurs);
 			}
 		}
 		
 		bouton.setVisible(false);
 	
+	}
+	
+	public void alerteDeFin(int erreurs) throws RemoteException {
+		boxJeu.setDisable(true);
+		Pendu p = new Pendu();
+		Alert alerteFin = new Alert(AlertType.INFORMATION);
+		alerteFin.setContentText(p.finDuJeu(erreurs));
+		alerteFin.setHeaderText(null);
+		alerteFin.showAndWait();
+		ButtonType oui = new ButtonType("oui", ButtonData.OK_DONE);
+		ButtonType non = new ButtonType("non", ButtonData.CANCEL_CLOSE);
+		Alert alertRecommencer = new Alert(AlertType.CONFIRMATION, "Voulez vous faire une nouvelle partie ?",oui,non);
+		Optional<ButtonType> resultat = alertRecommencer.showAndWait();
+		if(resultat.get().getText()=="oui") {
+			initialize(null,null);
+		}
 	}
 
 }

@@ -1,5 +1,5 @@
-bleu 
-autre 
+bleu
+autre
 bizarre
 drole
 etrange

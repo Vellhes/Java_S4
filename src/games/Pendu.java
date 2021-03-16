@@ -24,7 +24,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 			e.printStackTrace();
 		}
 		Random aleatoire = new Random();
-		return dico.get(aleatoire.nextInt(dico.size()));
+		return dico.get(aleatoire.nextInt(dico.size())).trim();
 	}
 
 	@Override
@@ -53,8 +53,12 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 
 	@Override
 	public String finDuJeu(int erreurs) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		if(erreurs == 9) {
+			return "Vous avez perdu... :( Vous ferez mieux la prochaine fois";
+		}
+		else {
+			return "Vous avez gagné ! :D GG ";
+		}
 	}
 
 }
