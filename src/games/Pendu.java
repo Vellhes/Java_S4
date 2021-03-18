@@ -15,6 +15,8 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 		super();
 	}
 
+	
+	//Méthode sélectionnant un mot aléatoire du fichier dictionnaire.txt
 	@Override
 	public String selectMot() throws RemoteException {
 		List<String> dico = null;
@@ -27,12 +29,15 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 		return dico.get(aleatoire.nextInt(dico.size())).trim();
 	}
 
+	
+	//Méthode vérifiant si la lettre choisie se trouve dans le mot à trouver
 	@Override
 	public boolean verifLettre(char lettre, String mot) throws RemoteException {
 		boolean verif = mot.indexOf(lettre) >= 0;
 		return verif;
 	}
 
+	//Méthode révélant les emplacement de la lettre choisie dans le mot à trouver
 	@Override
 	public String avancement(char lettre, String mot, String motCache) throws RemoteException {
 		String nouveauMot = "";
@@ -51,6 +56,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface{
 		return nouveauMot;
 	}
 
+	//Méthode annonçant si on a gagné ou perdu
 	@Override
 	public String finDuJeu(int erreurs) throws RemoteException {
 		if(erreurs == 9) {

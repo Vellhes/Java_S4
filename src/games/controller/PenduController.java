@@ -116,9 +116,9 @@ public class PenduController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Activation des différents éléments de la fenêtre
 		boxJeu.setDisable(false);
-		motCache = "";
-		erreurs = 0;
+		
 		btn_a.setVisible(true);
 		btn_b.setVisible(true);
 		btn_c.setVisible(true);
@@ -146,6 +146,11 @@ public class PenduController implements Initializable {
 		btn_y.setVisible(true);
 		btn_z.setVisible(true);
 
+		//Réinitialisation du mot caché et du nombre d'erreurs
+		motCache = "";
+		erreurs = 0;
+		
+		//Création d'un objet pendu pour pouvoir utiliser les méthodes rattachées
 		Pendu p = null;
 		try {
 			p = new Pendu();
@@ -153,32 +158,43 @@ public class PenduController implements Initializable {
 			e.printStackTrace();
 		}
 	
+		
+		//Génération du mot à trouver
 		try {
 			mot = p.selectMot();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		erreurs = 0;
-		
+		//Génération du mot caché
 		for(int i = 0; i<mot.length();i++)
 			motCache += "_ ";
+		
+		//Affichage du mot caché en tirets
 		lbl_pendu.setText(motCache);
+		
+		//Affichage de l'image de pendu vide
 		Image img = new Image("games/ressources/img/pendu0.png");
 		img_pendu.setImage(img);
 	}
 	
+	//Méthode utilisée lors du clic sur un bouton lettre
 	@FXML
 	public void choixLettre(ActionEvent evenement) throws RemoteException{
 		
+		//Création d'un objet pendu
 		Pendu p = new Pendu();
 		
+		//Récupération de la lettre choisie
 		Button bouton = (Button)evenement.getSource();
 		String chaineLettre = bouton.getText();
 		chaineLettre = chaineLettre.toLowerCase();
 		char lettre = chaineLettre.charAt(0);
 		
+		//Vérification de si la lettre se trouve dans le mot
 		boolean verif = p.verifLettre(lettre, mot);
+		
+		//Si la lettre s'y trouve on change le mot caché en rajoutant la lettre autant de fois qu'elle s'y trouve
 		if(verif==true) {
 			motCache = p.avancement(lettre, mot, motCache);
 			lbl_pendu.setText(motCache);
@@ -193,6 +209,8 @@ public class PenduController implements Initializable {
 				}
 			}
 		}
+		
+		//Si la lettre ne s'y trouve pas, on augmente le nombre d'erreurs, et on change l'image du pendu
 		else {
 			erreurs += 1;
 			Image img = new Image("games/ressources/img/pendu"+erreurs+".png");
@@ -202,10 +220,12 @@ public class PenduController implements Initializable {
 			}
 		}
 		
+		//On retire la lettre des possibilités en retirant le bouton
 		bouton.setVisible(false);
 	
 	}
 	
+	//Alerte de fin annonçant si on a gagné ou perdu, puis proposant de rejouer une nouvelle partie
 	public void alerteDeFin(int erreurs) throws RemoteException {
 		boxJeu.setDisable(true);
 		Pendu p = new Pendu();

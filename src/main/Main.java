@@ -2,7 +2,6 @@ package main;
 
 import java.rmi.RemoteException;
 
-import games.Pendu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,7 +13,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/pendu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/accueil.fxml"));
 		primaryStage.setTitle("JEUX");
 		primaryStage.setScene(new Scene(root,600,480));
 		primaryStage.show();
