@@ -12,10 +12,9 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		Parent root = FXMLLoader.load(getClass().getResource("../games/fxml/accueil.fxml"));
-		primaryStage.setTitle("JEUX");
-		primaryStage.setScene(new Scene(root,600,480));
+		primaryStage.setTitle("LAMpixel");
+		primaryStage.setScene(new Scene(root,600,400));
 		primaryStage.show();
 	}
 	
